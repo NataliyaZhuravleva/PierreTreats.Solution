@@ -92,7 +92,7 @@ namespace PierreTreats.Controllers
         .Any(join => join.TreatId == treat.TreatId && join.FlavorId == FlavorId);
         if (!returnedJoin)
         {
-          _db.EngineerMachine.Add(new EngineerMachine() { FlavorId = FlavorId, TreatId=treat.TreatId});
+          _db.TreatFlavor.Add(new TreatFlavor() { FlavorId = FlavorId, TreatId=treat.TreatId});
         }
       }
       _db.SaveChanges();
