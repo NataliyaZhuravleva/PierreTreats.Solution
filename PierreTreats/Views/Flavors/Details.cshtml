@@ -1,0 +1,32 @@
+@{
+  Layout = "_Layout";
+}
+
+@model PierreTreats.Models.Flavor
+
+<h2>Flavor Details</h2>
+
+<hr />
+<h4>Flavor Name: @Html.DisplayFor(model=>model.FlavorName)</h4>
+
+
+@if (Model.Treats.Count == 0)
+{
+  <p>This flavor can not be used with any treats.</p>
+}
+else
+{
+  <p>@Html.DisplayFor(model=>model.FlavorName) can be used with the next treat(s):</p>
+  <ul>
+    @foreach (var join in Model.Treats)
+    {
+      <li>@Html.ActionLink($"{@join.Treat.TreatName}", "Details", "Treats", new {id=join.Treat.TreatId}, null)</li>
+    }
+  </ul>
+}
+
+<hr />
+<p>@Html.ActionLink("Back to all treats", "Index", "Treats")</p>
+<p>@Html.ActionLink("Back to all flavors", "Index")</p>
+<p>@Html.ActionLink("Home", "Index", "Home")</p>
+

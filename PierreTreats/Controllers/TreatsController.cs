@@ -16,7 +16,7 @@ namespace PierreTreats.Controllers
 
     public ActionResult Index()
     {
-      return ViewModels (_db.Treats.ToList());
+      return View(_db.Treats.ToList());
     }
 
     public ActionResult Create()
