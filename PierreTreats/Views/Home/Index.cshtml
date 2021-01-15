@@ -2,10 +2,48 @@
   Layout = "_Layout";
 }
 
+@using PierreTreats.Models
+@model PierreTreats.Models.HomeViewModel
+
 <h1>Welcome to the Pierre's Sweet and Savory Treats!</h1>
 
+<hr />
 <p>@Html.ActionLink("Create an account", "Index", "Account")</p>
 <p>@Html.ActionLink("Log in", "Login", "Account")</p>
+
+<hr />
+<h2>Treats</h2>
+
+<hr />
+@if (Model.Treats.Count == 0)
+{
+  <h3>No treats have been added yet!</h3>
+}
+
+<ul>
+  @foreach (Treat treat in Model.Treats)
+  {
+    <li><p>@Html.ActionLink($"{treat.TreatName}", "Details", "Treats", new {id = treat.TreatId})</p></li>
+  }
+</ul>
+
+<hr />
+<h2>Flavors</h2>
+
+<hr />
+@if (@Model.Flavors.Count == 0)
+{
+  <h3>No flavors have been added yet!</h3>
+}
+
+<ul>
+  @foreach (Flavor flavor in Model.Flavors)
+  {
+    <li>@Html.ActionLink($"{flavor.FlavorName}", "Details", "Flavors", new {id = flavor.FlavorId})</li>
+  }
+</ul>
+<hr />
+
 
 <p>@Html.ActionLink("Show treates only", "Index", "Treats")</p>
 <p>@Html.ActionLink("Show flavors only", "Index", "Flavors")</p>
