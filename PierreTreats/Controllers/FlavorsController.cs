@@ -1,16 +1,21 @@
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PierreTreats.Models;
 using System.Linq;
-
+using System.Security.Claims;
+using System.Threading.Tasks;
 namespace PierreTreats.Controllers
 {
   public class FlavorsController : Controller
   {
     private readonly PierreTreatsContext _db;
-    public FlavorsController(PierreTreatsContext db)
+    private readonly UserManager<ApplicationUser> _userManager;
+    public TreatsController(UserManager<ApplicationUser> userManager, PierreTreatsContext db)
     {
+      _userManager = userManager;
       _db = db;
     }
 
@@ -19,8 +24,10 @@ namespace PierreTreats.Controllers
       return View(_db.Flavors.ToList());
     }
 
+    [Authorize]
     public ActionResult Create()
     {
+      ViewBag.TreatId = new SelectList(_db.Treats, "TreatId", "TreatName");
       return View();
     }
 
@@ -45,9 +52,11 @@ namespace PierreTreats.Controllers
 
       return View(thisFlavor);
     }
+    [Authorize]
     public ActionResult Edit(int id)
     {
       Flavor thisFlavor = _db.Flavors.FirstOrDefault(flavors => flavors.FlavorId == id);
+      ViewBag.TreatId = new SelectList(_db.Treats, "TreatId", "TreatName");
       return View(thisFlavor);
     }
 
@@ -59,6 +68,7 @@ namespace PierreTreats.Controllers
       return RedirectToAction("Details", "Flavors", new { id = flavor.FlavorId });
     }
 
+    [Authorize]
     public ActionResult Delete(int id)
     {
       Flavor thisFlavor = _db.Flavors.FirstOrDefault(flavors => flavors.FlavorId == id);
@@ -75,6 +85,7 @@ namespace PierreTreats.Controllers
     }
 
     //Add Treat to a particular Flavor
+    [Authorize]
     public ActionResult AddTreat(int id)
     {
       Flavor thisFlavor = _db.Flavors.FirstOrDefault(flavors => flavors.FlavorId == id);
@@ -99,6 +110,7 @@ namespace PierreTreats.Controllers
     }
 
     //Delete Treat from a particular Flavor
+    [Authorize]
     [HttpPost]
     public ActionResult DeleteTreat(int joinId, int FlavorId)
     {

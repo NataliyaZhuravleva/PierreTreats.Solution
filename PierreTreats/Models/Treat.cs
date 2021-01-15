@@ -1,7 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 
 namespace PierreTreats.Models
 {
@@ -14,6 +11,7 @@ namespace PierreTreats.Models
 
     public int TreatId { get; set; }
     public string TreatName { get; set; }
+    public virtual ApplicationUser User { get; set; }
     public ICollection<TreatFlavor> Flavors { get; }
   }
 }
