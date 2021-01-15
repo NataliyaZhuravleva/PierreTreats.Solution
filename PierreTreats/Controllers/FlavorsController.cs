@@ -13,7 +13,7 @@ namespace PierreTreats.Controllers
   {
     private readonly PierreTreatsContext _db;
     private readonly UserManager<ApplicationUser> _userManager;
-    public TreatsController(UserManager<ApplicationUser> userManager, PierreTreatsContext db)
+    public FlavorsController(UserManager<ApplicationUser> userManager, PierreTreatsContext db)
     {
       _userManager = userManager;
       _db = db;
@@ -34,7 +34,7 @@ namespace PierreTreats.Controllers
     [HttpPost]
     public ActionResult Create(Flavor flavor, int TreatId)
     {
-      _db.Flavors.Add(flavor)
+      _db.Flavors.Add(flavor);
       if (TreatId !=0)
       {
         _db.TreatFlavor.Add(new TreatFlavor(){FlavorId=flavor.FlavorId, TreatId=TreatId});

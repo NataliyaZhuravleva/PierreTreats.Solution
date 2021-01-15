@@ -35,7 +35,7 @@ namespace PierreTreats.Controllers
     [HttpPost]
     public ActionResult Create(Treat treat, int FlavorId)
     {
-      _db.Treats.Add(treat)
+      _db.Treats.Add(treat);
       if (FlavorId != 0)
       {
         _db.TreatFlavor.Add(new TreatFlavor() { FlavorId = FlavorId, TreatId = treat.TreatId });
@@ -57,7 +57,7 @@ namespace PierreTreats.Controllers
     public ActionResult Edit(int id)
     {
       Treat thisTreat = _db.Treats.FirstOrDefault(treats => treats.TreatId == id);
-      ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "FlavorName")
+      ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "FlavorName");
       return View(thisTreat);
     }
 
