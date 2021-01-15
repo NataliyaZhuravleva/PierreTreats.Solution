@@ -1,0 +1,17 @@
+@{
+  Layout = "_Layout";
+}
+
+@model PierreTreats.Models.Treat
+
+<h4>Add a new treat</h4>
+
+<hr />
+@using (Html.BeginForm())
+{
+  @Html.Label("Enter Treat Name: ")
+  @Html.TextBoxFor(model => model.TreatName)
+  
+  
+  <input type = "submit" value="Add new treat">
+}
