@@ -21,13 +21,14 @@ else
     @foreach (var join in Model.Flavors)
     {
       <li>@Html.ActionLink($"{@join.Flavor.FlavorName}", "Details", "Flavors", new {id=join.Flavor.FlavorId}, null)</li>
-      }
     }
   </ul>
 }
 
 <hr />
 
+<p>@Html.ActionLink("Edit treat", "Edit", new { id = Model.TreatId})</p>
+<p>@Html.ActionLink("Delete treat", "Delete", new { id = Model.TreatId})</p>
 <p>@Html.ActionLink("Back to all treats", "Index")</p>
 <p>@Html.ActionLink("Back to all flavors", "Index", "Flavors")</p>
 <p>@Html.ActionLink("Home", "Index", "Home")</p>
