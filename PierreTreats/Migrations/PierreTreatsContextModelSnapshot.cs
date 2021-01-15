@@ -174,6 +174,48 @@ namespace PierreTreats.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("PierreTreats.Models.Flavor", b =>
+                {
+                    b.Property<int>("FlavorId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("FlavorName");
+
+                    b.HasKey("FlavorId");
+
+                    b.ToTable("Flavors");
+                });
+
+            modelBuilder.Entity("PierreTreats.Models.Treat", b =>
+                {
+                    b.Property<int>("TreatId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("TreatName");
+
+                    b.HasKey("TreatId");
+
+                    b.ToTable("Treats");
+                });
+
+            modelBuilder.Entity("PierreTreats.Models.TreatFlavor", b =>
+                {
+                    b.Property<int>("TreatFlavorId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("FlavorId");
+
+                    b.Property<int>("TreatId");
+
+                    b.HasKey("TreatFlavorId");
+
+                    b.HasIndex("FlavorId");
+
+                    b.HasIndex("TreatId");
+
+                    b.ToTable("TreatFlavor");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
@@ -216,6 +258,19 @@ namespace PierreTreats.Migrations
                     b.HasOne("PierreTreats.Models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("PierreTreats.Models.TreatFlavor", b =>
+                {
+                    b.HasOne("PierreTreats.Models.Flavor", "Flavor")
+                        .WithMany("Treats")
+                        .HasForeignKey("FlavorId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("PierreTreats.Models.Treat", "Treat")
+                        .WithMany("Flavors")
+                        .HasForeignKey("TreatId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
