@@ -21,12 +21,19 @@ else
     @foreach (var join in Model.Flavors)
     {
       <li>@Html.ActionLink($"{@join.Flavor.FlavorName}", "Details", "Flavors", new {id=join.Flavor.FlavorId}, null)</li>
+      @using (Html.BeginForm("DeleteFlavor", "Treats"))
+      {
+        @Html.Hidden("joinId", @join.TreatFlavorId)
+        @Html.HiddenFor(model =>model.TreatId)
+    
+        <input type="submit" value="Delete" />
+      }
     }
   </ul>
 }
 
 <hr />
-
+<p>@Html.ActionLink("Add Flavor to Treat", "AddFlavor", new{id=Model.TreatId})</p>
 <p>@Html.ActionLink("Edit treat", "Edit", new { id = Model.TreatId})</p>
 <p>@Html.ActionLink("Delete treat", "Delete", new { id = Model.TreatId})</p>
 <p>@Html.ActionLink("Back to all treats", "Index")</p>
