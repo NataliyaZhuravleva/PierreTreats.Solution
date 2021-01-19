@@ -9,7 +9,7 @@ using PierreTreats.Models;
 namespace PierreTreats.Migrations
 {
     [DbContext(typeof(PierreTreatsContext))]
-    [Migration("20210115190152_Initial")]
+    [Migration("20210119021421_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -183,7 +183,11 @@ namespace PierreTreats.Migrations
 
                     b.Property<string>("FlavorName");
 
+                    b.Property<string>("UserId");
+
                     b.HasKey("FlavorId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Flavors");
                 });
@@ -195,7 +199,11 @@ namespace PierreTreats.Migrations
 
                     b.Property<string>("TreatName");
 
+                    b.Property<string>("UserId");
+
                     b.HasKey("TreatId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Treats");
                 });
@@ -261,6 +269,20 @@ namespace PierreTreats.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("PierreTreats.Models.Flavor", b =>
+                {
+                    b.HasOne("PierreTreats.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("PierreTreats.Models.Treat", b =>
+                {
+                    b.HasOne("PierreTreats.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("PierreTreats.Models.TreatFlavor", b =>
