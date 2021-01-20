@@ -130,6 +130,14 @@ _In the command line run the following commands to install packages:
 4. _Run the following command: $ `dotnet build`_
 5. _Run the following command to execute this compiled code: $ `dotnet run`_
 
+#### <span style="color:#c4f4ef">User Registration and Login</span>
+In order to create, edit and delete data, you need to be registered as a user and to be logged in during those changes.
+If you alredy have an account, please, just log in (you can find `Log in` link at Home page).
+To register follow the next steps:
+1. _Open app in browser and click `Create an account` link._
+2. _Enter your email and password. Then confirm your password._
+3. _If your password and confirmation password match, you will be redirected to you account page._
+4. _If your password and confirmation password do not match, you will get a message about that._
 
 ## <span style="color:#0ec2b8">Known Bugs</span>
 
