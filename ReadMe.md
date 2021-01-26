@@ -152,6 +152,7 @@ _If you have any questions, ideas or concerns, please, contact me at [natalindri
 
 * _C#_
 * _.NET_
+* _Identity_
 * _MySQL_
 * _MySQL Workbench_
 * _VisualStudio Code_
